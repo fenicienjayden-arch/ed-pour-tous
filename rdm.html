@@ -1,40 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RDM - Ed pour tous</title>
-<style>
-body{font-family:Arial;padding:15px;background:#f5f7ff}
-h1{color:#0d47a1}
-.card{background:#fff;padding:15px;border-radius:10px;margin:12px 0;box-shadow:0 2px 5px #aaa}
-a{color:#2962ff;text-decoration:none;font-weight:bold}
-</style>
-</head>
-<body>
-<a href="index.html">← Retour accueil</a>
-<h1>📘 Résistance des Matériaux</h1>
-
-<div class="card">
-<h3>1. Définition</h3>
-<p>La RDM étudie si le béton, acier, bois va casser sous une charge. Indispensable pour construire à Bunia.</p>
-</div>
-
-<div class="card">
-<h3>2. Formules de base</h3>
-<p><b>Contrainte:</b> σ = F / S<br>
-<b>Déformation:</b> σ = E × ε<br>
-<b>Moment poutre:</b> M = P × L / 4<br>
-<b>Béton:</b> E = 30000 MPa | <b>Acier:</b> E = 210000 MPa</p>
-</div>
-
-<div class="card">
-<h3>3. Exemple pratique RDC</h3>
-<p>Poteau 30x30cm avec 50 tonnes.<br>
-Surface = 900 cm²<br>
-Contrainte = 50000 kg / 900 = 5.5 MPa<br>
-Béton résiste à 25 MPa → <b>Le poteau tient !</b></p>
-</div>
-
-</body>
-</html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RDM Livre Complet</title>
+<style>body{font-family:Arial;padding:0;margin:0;background:#eef2f7;line-height:1.7}header{background:#0d47a1;color:#fff;padding:20px;text-align:center}nav{background:#fff;padding:10px;position:sticky;top:0;box-shadow:0 2px 5px #aaa;display:flex;flex-wrap:wrap;gap:6px}nav a{color:#0d47a1;text-decoration:none;font-weight:bold;border:1px solid #0d47a1;padding:4px 8px;border-radius:5px}.chapitre{margin:12px;background:#fff;padding:18px;border-radius:10px;box-shadow:0 2px 8px #bbb}h2{color:#0d47a1;border-bottom:3px solid #2962ff;padding-bottom:5px}.formule{background:#e3f2fd;padding:10px;border-left:5px solid #2962ff;margin:10px 0;font-weight:bold}.exemple{background:#fff8e1;padding:12px;border-left:5px solid #f9a825;margin:10px 0}table{width:100%;border-collapse:collapse}th,td{border:1px solid #aaa;padding:8px}th{background:#0d47a1;color:#fff}</style></head><body>
+<header><h1>📚 RDM - LIVRE COMPLET</h1><p>Université - Ed pour tous RDC</p><a href="index.html" style="color:yellow">← Retour Accueil</a></header>
+<nav><a href="#ch1">Intro</a><a href="#ch2">Contraintes</a><a href="#ch3">Traction</a><a href="#ch4">Cisaillement</a><a href="#ch5">Torsion</a><a href="#ch6">Flexion</a><a href="#ch7">Flambement</a><a href="#ch8">Chantier Bunia</a><a href="#exo">Exos</a></nav>
+<div class="chapitre" id="ch1"><h2>Ch1: Introduction</h2><p>La RDM c'est la science qui empêche ta maison de tomber. Elle étudie déformation et rupture sous charge. Objectif: construire solide sans gaspiller ciment/fer à Bunia.</p><p><b>Hypothèses:</b> Matériau homogène, isotrope, élasticité linéaire.</p></div>
+<div class="chapitre" id="ch2"><h2>Ch2: Contraintes et Déformations</h2><div class="formule">σ = F / S (MPa) | σ = E × ε | ε = ΔL / L</div><table><tr><th>Matériau</th><th>E (MPa)</th><th>Résistance</th></tr><tr><td>Béton C25</td><td>30000</td><td>25 MPa</td></tr><tr><td>Acier Fe500</td><td>210000</td><td>500 MPa</td></tr><tr><td>Bois RDC</td><td>12000</td><td>20 MPa</td></tr></table></div>
+<div class="chapitre" id="ch3"><h2>Ch3: Traction / Compression - Poteau</h2><div class="formule">σ = N / S ≤ σ_adm | σ_adm = 0.6×fc28 / 1.5 = 14 MPa pour C25</div><div class="exemple"><b>EXEMPLE 1 COMPLET:</b> Poteau 60 tonnes = 600kN. S_min = 600000/14 = 42857mm² => 21x21cm. Par sécurité Bunia on prend 30x30cm avec 6HA12.<br><b>Raccourcissement:</b> ΔL = N×L / (E×S) = 600kN×3m / (30000×900cm²) = 0.66mm</div></div>
+<div class="chapitre" id="ch4"><h2>Ch4: Cisaillement</h2><div class="formule">τ = T / S</div><div class="exemple">Poutre T=50kN, S=20x40=800cm², τ=0.625MPa < 3MPa OK. Mais il faut cadres HA6 tous les 15cm près des appuis.</div></div>
+<div class="chapitre" id="ch5"><h2>Ch5: Torsion</h2><p>Pour escaliers hélicoïdaux. Formule: τ_max = Mt×r / I0</p></div>
+<div class="chapitre" id="ch6"><h2>Ch6: FLEXION - Le plus important</h2><div class="formule">Charge milieu: M = P×L/4 | Charge répartie: M = q×L²/8<br>σ = M×y / I | I = b×h³/12</div><div class="exemple"><b>EXEMPLE 2 - POUTRE SALON BUNIA:</b> L=5m, q=10kN/m (dalle). M=10×25/8=31.25kN.m. Section 20x40cm, I=106666cm4. σ=5.86MPa OK. Ferraillage: 3HA12 en bas + 2HA10 en haut + cadres HA6/15cm.</div></div>
+<div class="chapitre" id="ch7"><h2>Ch7: Flambement</h2><div class="formule">P_cr = π²×E×I / L²</div><p>Si poteau trop élancé, il flambe. Règle Bunia: poteau 20x20 max 3m, sinon 30x30.</p></div>
+<div class="chapitre" id="ch8"><h2>Ch8: Chantier Réel Bunia R+1</h2><p>Maison 3 chambres:</p><ul><li>Semelle: 80x80x30cm, béton 350kg/m3</li><li>Poteaux: 30x30, 6HA12</li><li>Poutres: 20x40, 3HA12 bas</li><li>Dalle: hourdis 15cm + 5cm compression</li><li>Dosage: 1 sac ciment + 2 sable + 3 gravier + 30L eau</li></ul></div>
+<div class="chapitre" id="exo"><h2>Exercices Corrigés Examen Unibunia</h2><p><b>Exo1:</b> Tirant acier 2m, S=5cm², F=20T => ΔL=3.8mm</p><p><b>Exo2:</b> Poutre 4m, P=5T milieu => M=50kN.m</p><p><b>Exo3:</b> Vérifier poteau 25x25, N=40T => σ=6.4MPa OK</p><p><b>Exo4 EXAMEN:</b> Dimensionner poutre 6m, q=15kN/m => Prendre 25x50cm, 4HA14 bas.</p></div>
+</body></html>
