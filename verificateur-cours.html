@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Vérificateur de COURS - ED POUR TOUS</title>
+<style>body{margin:0;font-family:Arial;background:#f5f7fb;padding:10px}h1{text-align:center;background:#01579b;color:#fff;padding:15px;border-radius:15px}table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.1)}th{background:#01579b;color:#fff;padding:10px;font-size:12px}td{padding:8px;border-bottom:1px solid #eee;font-size:11px}.ok{color:green;font-weight:bold;background:#e8f5e9}.manque{color:red;font-weight:bold;background:#ffebee}.vide{color:orange;font-weight:bold;background:#fff3e0}#log{margin-top:15px;padding:10px;background:#fff;border-radius:10px}</style>
+</head><body>
+<h1>📚 Vérificateur de CONTENU des cours<br><small style="font-size:14px">Vérifie si les cours sont vides (#) ou remplis</small></h1>
+<div id="log">Chargement... vérification de 76 fichiers...</div>
+<table id="tab"><thead><tr><th>Filière</th><th>Classe</th><th>Fichier</th><th>Nb Cours</th><th>Statut</th></tr></thead><tbody></tbody></table>
+<script>
+const filieres=["chimie","peche","esthetique","commerciale","secretariat","social","pedagogie","agriculture","veterinaire","nutrition","electricite","mecanique","construction","electronique","coupe","informatique","litteraire","scientifique","hotellerie","electricite","mecanique-auto","menuiserie"];
+const classes=["3e","4e","5e","6e"];
+const files=[];
+["chimie","peche","esthetique","commerciale","secretariat","social","pedagogie","agriculture","veterinaire","nutrition","electricite","mecanique","construction","electronique","coupe","informatique","litteraire","scientifique","hotellerie"].forEach(f=>{
+ classes.forEach(c=>{
+   files.push({filiere:f,classe:c,file:`${c}-${f}-FINAL.html`});
+ });
+});
+
+let tbody=document.querySelector("#tab tbody");
+let log=document.getElementById("log");
+let ok=0,vide=0,manque=0;
+
+async function checkOne(item){
+  let tr=document.createElement("tr");
+  let tdF=document.createElement("td"); tdF.textContent=item.filiere;
+  let tdC=document.createElement("td"); tdC.textContent=item.classe;
+  let tdFile=document.createElement("td"); tdFile.textContent=item.file;
+  let tdNb=document.createElement("td"); tdNb.textContent="...";
+  let tdStat=document.createElement("td"); tdStat.textContent="...";
+  tr.append(tdF,tdC,tdFile,tdNb,tdStat);
+  tbody.appendChild(tr);
+  try{
+    let r=await fetch(item.file+"?t="+Date.now());
+    if(!r.ok) throw "404";
+    let txt=await r.text();
+    let count=(txt.match(/class="cours"/g)||[]).length;
+    let empty=(txt.match(/href="#"/g)||[]).length;
+    tdNb.textContent=count+" cours";
+    if(count<10){ tdStat.textContent="❌ VIDE / MANQUE"; tdStat.className="manque"; manque++; }
+    else if(empty>8){ tdStat.textContent="⚠️ VIDE - Liens #"; tdStat.className="vide"; vide++; }
+    else { tdStat.textContent="✅ REMPLI"; tdStat.className="ok"; ok++; }
+  }catch(e){
+    tdNb.textContent="0"; tdStat.textContent="❌ FICHIER MANQUE"; tdStat.className="manque"; manque++;
+  }
+  log.innerHTML=`✅ Remplis: ${ok} | ⚠️ Vides (#): ${vide} | ❌ Manquants: ${manque} | Total: ${files.length}`;
+}
+
+(async()=>{
+ for(let f of files){ await checkOne(f); await new Promise(r=>setTimeout(r,80)); }
+})();
+</script>
+</body></html>
