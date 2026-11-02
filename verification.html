@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Vérification - ED POUR TOUS</title><style>body{margin:0;font-family:Arial;background:#f0f3f7;padding:15px}h1{text-align:center}table{width:100%;max-width:900px;margin:15px auto;background:#fff;border-radius:12px;overflow:hidden;border-collapse:collapse;box-shadow:0 4px 12px rgba(0,0,0,.08)}th{background:#0d2137;color:#fff;padding:12px;text-align:left}td{padding:10px 12px;border-bottom:1px solid #eee;font-size:13px}.ok{color:#00a651;font-weight:bold}.no{color:#e53935;font-weight:bold}.btn{display:block;max-width:900px;margin:10px auto;background:#0d2137;color:#fff;text-align:center;padding:14px;border-radius:12px;text-decoration:none;font-weight:bold}</style></head><body>
+<h1>📊 VÉRIFICATION ED POUR TOUS</h1>
+<a class="btn" href="index.html">← Retour Accueil</a>
+<table id="tab"><thead><tr><th>OPTION</th><th>PAGE PRINCIPALE</th><th>3e</th><th>4e</th><th>5e</th><th>6e</th></tr></thead><tbody></tbody></table>
+<script>
+const options=[
+["Chimie Ind.","chimie.html","3e-chimie-FINAL.html","4e-chimie-FINAL.html","5e-chimie-FINAL.html","6e-chimie-FINAL.html"],
+["Pêche & Nav","peche.html","3e-peche-FINAL.html","4e-peche-FINAL.html","5e-peche-FINAL.html","6e-peche-FINAL.html"],
+["Esthétique","esthetique.html","3e-esthetique-FINAL.html","4e-esthetique-FINAL.html","5e-esthetique-FINAL.html","6e-esthetique-FINAL.html"],
+["Commerciale","commerciale.html","3e-commerciale-FINAL.html","4e-commerciale-FINAL.html","5e-commerciale-FINAL.html","6e-commerciale-FINAL.html"],
+["Secrétariat","secretariat.html","3e-secretariat-FINAL.html","4e-secretariat-FINAL.html","5e-secretariat-FINAL.html","6e-secretariat-FINAL.html"],
+["Sociale","social.html","3e-social-FINAL.html","4e-social-FINAL.html","5e-social-FINAL.html","6e-social-FINAL.html"],
+["Pédagogie","pedagogie.html","3e-pedagogie-FINAL.html","4e-pedagogie-FINAL.html","5e-pedagogie-FINAL.html","6e-pedagogie-FINAL.html"],
+["Agriculture","agriculture.html","3e-agriculture-FINAL.html","4e-agriculture-FINAL.html","5e-agriculture-FINAL.html","6e-agriculture-FINAL.html"],
+["Vétérinaire","veterinaire.html","3e-veterinaire-FINAL.html","4e-veterinaire-FINAL.html","5e-veterinaire-FINAL.html","6e-veterinaire-FINAL.html"],
+["Nutrition","nutrition.html","3e-nutrition-FINAL.html","4e-nutrition-FINAL.html","5e-nutrition-FINAL.html","6e-nutrition-FINAL.html"],
+["Électricité","electricite.html","3e-electricite-FINAL.html","4e-electricite-FINAL.html","5e-electricite-FINAL.html","6e-electricite-FINAL.html"],
+["Mécanique","mecanique.html","3e-mecanique-FINAL.html","4e-mecanique-FINAL.html","5e-mecanique-FINAL.html","6e-mecanique-FINAL.html"],
+["Construction","construction.html","3e-construction-FINAL.html","4e-construction-FINAL.html","5e-construction-FINAL.html","6e-construction-FINAL.html"],
+["Électronique","electronique.html","3e-electronique-FINAL.html","4e-electronique-FINAL.html","5e-electronique-FINAL.html","6e-electronique-FINAL.html"],
+["Coupe & Couture","coupe.html","3e-coupe-FINAL.html","4e-coupe-FINAL.html","5e-coupe-FINAL.html","6e-coupe-FINAL.html"],
+["Informatique","informatique.html","3e-informatique-FINAL.html","4e-informatique-FINAL.html","5e-informatique-FINAL.html","6e-informatique-FINAL.html"],
+["Littéraire","litteraire.html","3e-litteraire-FINAL.html","4e-litteraire-FINAL.html","5e-litteraire-FINAL.html","6e-litteraire-FINAL.html"],
+["Scientifique","scientifique.html","3e-scientifique-FINAL.html","4e-scientifique-FINAL.html","5e-scientifique-FINAL.html","6e-scientifique-FINAL.html"],
+["Hôtellerie","hotellerie.html","3e-hotellerie-FINAL.html","4e-hotellerie-FINAL.html","5e-hotellerie-FINAL.html","6e-hotellerie-FINAL.html"],
+];
+const tbody=document.querySelector("#tab tbody");
+options.forEach(o=>{
+let tr=document.createElement("tr");
+tr.innerHTML=`<td><b>${o[0]}</b></td>`+o.slice(1).map(f=>`<td><a href="${f}" target="_blank" style="text-decoration:none">${f}</a><br><span class="check" data-f="${f}">⏳ test...</span></td>`).join("");
+tbody.appendChild(tr);
+});
+async function check(){
+document.querySelectorAll(".check").forEach(async el=>{
+let f=el.dataset.f;
+try{let r=await fetch(f,{method:"HEAD"});if(r.ok){el.innerHTML='<span class="ok">✅ OK</span>'}else{el.innerHTML='<span class="no">❌ MANQUE</span>'}}catch{el.innerHTML='<span class="no">❌ MANQUE</span>'}
+});
+}
+check();
+</script>
+</body></html>
